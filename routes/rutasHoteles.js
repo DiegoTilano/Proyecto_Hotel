@@ -24,14 +24,14 @@ rutasAPI.delete('/api/habitaciones/:id', controladorHabitacion.eliminar)
 
 //Reservas
 
-rutasAPI.post('/api/habitaciones', controladorReservas.reservarHabitacion)
+rutasAPI.post('/api/reservas', controladorReservas.reservarHabitacion)
 
-rutasAPI.get('/api/habitaciones', controladorReservas.reservarId)
+rutasAPI.get('/api/reservas', controladorReservas.reservarId)
 
-rutasAPI.get('/api/habitacion/:id', controladorReservas.reservarId )
+rutasAPI.get('/api/reservas/:id', controladorReservas.reservarId )
   
-rutasAPI.put('/api/habitaciones/:id',controladorReservas.modificarReserva )
+rutasAPI.put('/api/reservas/:id',controladorReservas.modificarReserva )
 
-rutasAPI.delete('/api/habitaciones/:id',controladorReservas.eliminarReserva )
+rutasAPI.delete('/api/reservas/:id',controladorReservas.eliminarReserva )
 
 

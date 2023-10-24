@@ -2,11 +2,14 @@
 
 import  express  from 'express'
 import { rutasAPI } from "./routes/rutasHoteles.js"
+import { establecerConexionBD } from './database/conexion.js'
+
 
 export class Api{
 
     constructor(){
         this.app = express()
+        this.conetarBD()
         this.procesarPeticiones()
 
     }
@@ -26,6 +29,9 @@ export class Api{
     }
 
     //3.Se conecto a la base de datos 
+    conetarBD(){
+        establecerConexionBD()
+    }
 
 
 

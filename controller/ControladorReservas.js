@@ -8,14 +8,14 @@ export class ControladorReservas{
             //3.envio la respuesta
             response.status(200).json({
                 "estado":true,
-                "mensaje":"Exito buscando las habitaciones",
+                "mensaje":"Exito Reservando",
                 "datos":"ACA VAN LOS DATOS DE CONSULTADOS EN LA BASE DE DATOS"
             })
 
         }catch(error){
             response.status(400).json({
                 "estado":false,
-                "mensaje":"Fallamos buscando las habitaciones",
+                "mensaje":"Fallamos buscando la Reserva",
                 "datos":null
             })
         }
@@ -29,7 +29,7 @@ export class ControladorReservas{
             //3.respondo al cliente
             response.status(200).json({
                 "estado":true,
-                "mensaje":"Exito buscando la habitacion",
+                "mensaje":"Exito buscando la reserva por id",
                 "datos":"ACA VAN LOS DATOS DE CONSULTADOS EN LA BASE DE DATOS"
             })
 
@@ -51,7 +51,7 @@ export class ControladorReservas{
             //3.enviar la respuesta
             response.status(200).json({
                 "estado":true,
-                "mensaje":"Exito buscando la habitacion",
+                "mensaje":"Exito modificando la reserva",
                 "datos":null
             })
             
@@ -73,7 +73,7 @@ export class ControladorReservas{
             //3.responda
             response.status(200).json({
                 "estado":true,
-                "mensaje":"Exito regitrando la habitacion",
+                "mensaje":"Exito regitrando la reserva",
                 "datos":null
             })
 
@@ -94,7 +94,7 @@ export class ControladorReservas{
             //3.responda
             response.status(200).json({
                 "estado":true,
-                "mensaje":"Exito borrando la habitacion",
+                "mensaje":"Exito borrando la reserva",
                 "datos":null
             })
 

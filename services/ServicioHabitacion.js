@@ -1,6 +1,6 @@
 import {modeloHabitacion} from "../models/modeloHabitacion.js"
 export class ServicioHabitacion{
-
+ 
     constructor(){}
 
     async buscarTodas(){

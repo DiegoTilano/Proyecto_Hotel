@@ -3,7 +3,7 @@
 
 import  express  from 'express';
 //importo los controladores
-import { ControladorHabitacion } from '../controller/ControladorHabitacion.js'
+import { ControladorHabitacion } from '../controller/controladorHabitacion.js'
 import { ControladorReservas } from '../controller/ControladorReservas.js'
 
 let controladorHabitacion = new ControladorHabitacion()

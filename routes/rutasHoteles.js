@@ -26,7 +26,7 @@ rutasAPI.delete('/api/habitaciones/:id', controladorHabitacion.eliminar)
 
 rutasAPI.post('/api/reservas', controladorReservas.reservarHabitacion)
 
-rutasAPI.get('/api/reservas', controladorReservas.reservarId)
+rutasAPI.get('/api/reserva', controladorReservas.reservarHabitacion)
 
 rutasAPI.get('/api/reservas/:id', controladorReservas.reservarId )
   

@@ -1,7 +1,9 @@
+import { ServicioHabitacion } from "../services/ServicioHabitacion.js"
+
 export class ControladorHabitacion{
     constructor(){}
 
-    buscarTodas(request,response){
+     async buscarTodas(request,response){
         try{
             //1.hay que recibir datos
             //2.intentare conectarme a la base de datos
@@ -9,7 +11,7 @@ export class ControladorHabitacion{
             response.status(200).json({
                 "estado":true,
                 "mensaje":"Exito buscando las habitaciones",
-                "datos":"ACA VAN LOS DATOS DE CONSULTADOS EN LA BASE DE DATOS"
+                "datos": await ServicioHabitacion.buscarTodas()
             })
 
         }catch(error){
@@ -21,7 +23,7 @@ export class ControladorHabitacion{
         }
     }
 
-    buscarId(request,response){
+      buscarId(request,response){
         try{
             //1.Hay que recibir datos
             let id=request.params.id
@@ -29,7 +31,7 @@ export class ControladorHabitacion{
             //3.respondo al cliente
             response.status(200).json({
                 "estado":true,
-                "mensaje":"Exito buscando la habitacion",
+                "mensaje":"Exito buscando la habitacion por ID",
                 "datos":"ACA VAN LOS DATOS DE CONSULTADOS EN LA BASE DE DATOS"
             })
 
@@ -42,7 +44,7 @@ export class ControladorHabitacion{
         }
     }
 
-    modificar(request,response){
+     modificar(request,response){
         try{
             //1.ahi que recibir datos (SI)
             let id=request.params.id
@@ -51,7 +53,7 @@ export class ControladorHabitacion{
             //3.enviar la respuesta
             response.status(200).json({
                 "estado":true,
-                "mensaje":"Exito buscando la habitacion",
+                "mensaje":"Exito Modificando Reserva",
                 "datos":null
             })
             
@@ -64,7 +66,7 @@ export class ControladorHabitacion{
         }
     }
 
-    registrar(request,response){
+     registrar(request,response){
         try{
             //1.hay que recibir datos (SI)
             let datosRegistrado=request.body
@@ -85,12 +87,12 @@ export class ControladorHabitacion{
         }
     }
 
-    eliminar(request,response){
+     eliminar(request,response){
         try{
             //.1Hay  que recibir datos (SI)
             let id=request.params.id
             //2.eliminelo
-            //3.responda
+            //3.responda 
             response.status(200).json({
                 "estado":true,
                 "mensaje":"Exito borrando la habitacion",

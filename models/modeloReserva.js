@@ -1,6 +1,6 @@
 import mongoose, { Mongoose } from "mongoose";
 
-const Schema = Mongoose.Schama
+const Schema = Mongoose.Schemaz
 
 const Habitacion = new Schema({
     nombreCliente:{

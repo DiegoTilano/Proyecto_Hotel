@@ -1,111 +1,152 @@
+import { response } from "express"
 import { ServicioHabitacion } from "../services/ServicioHabitacion.js"
+import { ModeloHabitacion } from "../models/modeloHabitacion.js"
 
-export class ControladorHabitacion{
-    constructor(){}
+export class ControladorHabitacion {
+    constructor() { }
 
-     async buscarTodas(request,response){
-        try{
+    async buscarTodas(req, res = response) {//FUNCIONA
+        try {
             //1.hay que recibir datos
             //2.intentare conectarme a la base de datos
             //3.envio la respuesta
-            response.status(200).json({
-                "estado":true,
-                "mensaje":"Exito buscando las habitaciones",
-                "datos": await ServicioHabitacion.buscarTodas()
-            })
-
-        }catch(error){
-            response.status(400).json({
-                "estado":false,
-                "mensaje":"Fallamos buscando las habitaciones",
-                "datos":null
-            })
+            const listaDeHabitaciones = await ModeloHabitacion.find();
+    
+           res.status(200).json({
+            estado: true,
+            mensaje: "Exito buscando todas las habitaciones",
+            datos: listaDeHabitaciones,
+          });
+        } catch (error) {
+            console.log("ERR: ", error);
+          res.status(400).json({
+            estado: false,
+            mensaje: "Fallo al buscar todas las habitaciones",
+            datos: null,
+          });
         }
     }
 
-      buscarId(request,response){
-        try{
-            //1.Hay que recibir datos
-            let id=request.params.id
+    async buscarId(req, res = response) {//FUNCIONA
+        try {
+            let id = req.params.id;
+            console.log('ID: ', id)
             //2.con el id que mando el cliente busco la habitancion en la base de datos
             //3.respondo al cliente
-            response.status(200).json({
-                "estado":true,
-                "mensaje":"Exito buscando la habitacion por ID",
-                "datos":"ACA VAN LOS DATOS DE CONSULTADOS EN LA BASE DE DATOS"
-            })
+            const Habitacionid = await ModeloHabitacion.findById(id);
+            res.status(200).json({
+              estado: true,
+              mensaje: "Exito buscando la reserva por id",
+              datos: Habitacionid,
+            });
+          } catch (error) {
+            console.log("ERR: ", error)
+            res.status(400).json({
+              estado: false,
+              mensaje: "Fallamos buscando la habitaciones por id " + error,
+              datos: null,
+            });
+          }
+    }
 
-        }catch(error){
-            response.status(400).json({
-                "estado":false,
-                "mensaje":"Fallamos buscando las habitaciones"+error,
-                "datos":null
-            })
+    async modificar(req,res = response) {//FUNCIONA
+        try {
+            let id = req.params.id;
+          let datosModificados = req.body;
+          console.log('ID: ', id)
+          console.log('datos modifiados', datosModificados)
+    
+          //2.modificar en la base de datos
+          //3.enviar la respuesta
+          const habitacionActualizada = await ModeloHabitacion.findByIdAndUpdate(
+            id,
+            datosModificados,
+            { new: true }
+          );
+    
+          res.status(200).json({
+            estado: true,
+            mensaje: "Exito modificando la habitacion",
+            datos: habitacionActualizada,
+          });
+        } catch (error) {
+          res.status(400).json({
+            estado: false,
+            mensaje: "Fallamos modificando la habitacion" + error,
+            datos: null,
+          });
         }
     }
 
-     modificar(request,response){
-        try{
-            //1.ahi que recibir datos (SI)
-            let id=request.params.id
-            let datosModificar=request.body
-            //2.modificar en la base de datos
-            //3.enviar la respuesta
-            response.status(200).json({
-                "estado":true,
-                "mensaje":"Exito Modificando Reserva",
-                "datos":null
-            })
-            
-        }catch(error){
-            response.status(400).json({
-                "estado":false,
-                "mensaje":"Fallamos modificando la habitacion"+error,
-                "datos":null
-            })
-        }
-    }
-
-     registrar(request,response){
-        try{
+    async registrar(req, res = response) {//FUNCIONA
+        try {
             //1.hay que recibir datos (SI)
-            let datosRegistrado=request.body
+            let datosRegistrado = req.body
             //2.guardelos en la base de datos
             //3.responda
-            response.status(200).json({
-                "estado":true,
-                "mensaje":"Exito regitrando la habitacion",
-                "datos":null
-            })
-
-        }catch(error){
-            response.status(400).json({
-                "estado":false,
-                "mensaje":"Fallamos guardando la habitacion"+error,
-                "datos":null
-            })
+            const Habitacion = new ModeloHabitacion(datosRegistrado);
+            await Habitacion.save();
+            res.status(200).json({
+                estado: true,
+                mensaje: "Exito Registrando",
+                datos: datosRegistrado,
+            });
+        } catch (error) {
+            console.log("ERR: ", error);
+            res.status(400).json({
+                estado: false,
+                mensaje: "Fallo la Registrada",
+                datos: null,
+            });
         }
     }
 
-     eliminar(request,response){
-        try{
+    async eliminar(request,response) {
+        try {
             //.1Hay  que recibir datos (SI)
-            let id=request.params.id
+            let id = request.params.id;
             //2.eliminelo
-            //3.responda 
+            //3.responda
+            await ModeloHabitacion.findByIdAndUpdate(id, { activo: false });
             response.status(200).json({
-                "estado":true,
-                "mensaje":"Exito borrando la habitacion",
-                "datos":null
-            })
-
-        }catch(error){
+              estado: true,
+              mensaje: "Se ha cancelado la habitacion",
+              datos: null,
+            });
+          } catch (error) {
             response.status(400).json({
-                "estado":false,
-                "mensaje":"Fallamos eliminando la habitacion"+error,
-                "datos":null
-            })
-        }
-    }
+              estado: false,
+              mensaje: "Fallamos eliminando la habitacion" + error,
+              datos: null,
+            });
+          }
 
+    }
+    async reactivarHabitacion(request,response) {
+        try {
+            //.1Hay  que recibir datos (SI)
+            let id = request.params.id;
+            //2.eliminelo
+            //3.responda
+            await ModeloHabitacion.findByIdAndUpdate(id, { activo: true });
+            response.status(200).json({
+              estado: true,
+              mensaje: "Se ha recuperado la habitacion",
+              datos: null,
+            });
+          } catch (error) {
+            response.status(400).json({
+              estado: false,
+              mensaje: "Fallamos recuperando la habitacion" + error,
+              datos: null,
+            });
+          }
+
+    }
 }
+
+
+
+
+
+

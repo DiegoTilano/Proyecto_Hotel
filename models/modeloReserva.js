@@ -1,8 +1,11 @@
-import mongoose, { Mongoose } from "mongoose";
+import {Schema, model} from "mongoose";
 
-const Schema = Mongoose.Schemaz
 
-const Habitacion = new Schema({
+const Habitacion =  Schema({
+    activo: {
+        type:Boolean,
+        required: true
+    },
     nombreCliente:{
         type:String,
         required:true
@@ -16,11 +19,11 @@ const Habitacion = new Schema({
         required:true
     },
     fechaInicioReserva:{
-        type:Date,
+        type:String,
         required:true
     },
     fechaFinalReserva:{
-        type:Date,
+        type:String,
         required:true
     },
     numeroPersonas:{
@@ -28,5 +31,4 @@ const Habitacion = new Schema({
         required:true
     }
 })
-
-export const modeloReserva = mongoose.model('habitacion',Habitacion)
+export const ModeloReserva = model('Habitacion',Habitacion)

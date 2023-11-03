@@ -1,22 +1,26 @@
 import mongoose from "mongoose";
 const Schema=mongoose.Schema;
 const Habitacion=new Schema({
-    "nombre":{
+    activo: {
+        type:Boolean,
+        required: true
+    },
+    nombre:{
         type: String,
         required:true
     },
-    "foto":{
+    foto:{
         type:String,
         required:true
     },
-    "descripcion":{
+    descripcion:{
         type:String,
         required:true
     },
-    "precioNoche":{
+    precioNoche:{
         type:Number,
         required:true
     }
 })
 
-export const modeloHabitacion=mongoose.model('Habitaciones',Habitacion)
+export const ModeloHabitacion=mongoose.model('Habitaciones',Habitacion)

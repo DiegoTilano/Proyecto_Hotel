@@ -12,13 +12,15 @@ let controladorReservas = new ControladorReservas()
 export let rutasAPI = express.Router()
 
 //Aca pones tus endpoinst
-rutasAPI.post('/api/habitaciones',controladorHabitacion.registrar)
+rutasAPI.post('/api/habitaciones',controladorHabitacion.registrar)//LISTO
 
-rutasAPI.get('/api/habitaciones',controladorHabitacion.buscarTodas)
+rutasAPI.get('/api/habitaciones',controladorHabitacion.buscarTodas)//FUNCIONA
 
-rutasAPI.get('/api/habitacion/:id', controladorHabitacion.buscarId)
+rutasAPI.get('/api/habitacion/:id', controladorHabitacion.buscarId)//FUNCIONA
   
-rutasAPI.put('/api/habitaciones/:id', controladorHabitacion.modificar)
+rutasAPI.put('/api/habitaciones/:id', controladorHabitacion.modificar)//FUNCIONA
+
+//rutasAPI.put('/api/activarHabitacion/:id', controladorHabitacion.reactivarHabitacion)
 
 rutasAPI.delete('/api/habitaciones/:id', controladorHabitacion.eliminar)
 
@@ -26,7 +28,7 @@ rutasAPI.delete('/api/habitaciones/:id', controladorHabitacion.eliminar)
 
 rutasAPI.post('/api/reservas', controladorReservas.reservarHabitacion)
 
-rutasAPI.get('/api/reserva', controladorReservas.reservarHabitacion)
+rutasAPI.get('/api/reservas', controladorReservas.obtenerReservas)
 
 rutasAPI.get('/api/reservas/:id', controladorReservas.reservarId )
   
